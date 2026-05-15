@@ -8,7 +8,13 @@ const sequelize = new Sequelize(db.database, db.user, db.password, {
 });
 
 sequelize.authenticate()
-    .then(() => console.log('Conexión exitosa a MySQL'))
-    .catch(err => console.error('Error al conectar a MySQL:', err));
+    .then(() => {
+        console.log('Conexión exitosa a MySQL');
+        return sequelize.sync(); 
+    })
+    .then(() => {
+        console.log('Tablas sincronizadas correctamente');
+    })
+    .catch(err => console.error('Error en MySQL:', err));
 
 module.exports = sequelize;

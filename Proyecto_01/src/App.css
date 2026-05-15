@@ -7,7 +7,27 @@ body {
 *{
   box-sizing: border-box;
 }
-.contenedor {
+.App{
+  margin: 3px auto;
+}
+.img-usuario{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.img{
+  width: 150px;
+}
+.contenedor_1{
+ max-width: 800px;
+ margin: 200px auto;
+ background-color: white;
+ padding: 25px;
+ border-radius: 12px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.contenedor_2 {
  max-width: 800px;
  margin: 30px auto;
  background-color: white;
@@ -22,12 +42,24 @@ button {
  padding: 10px 16px;
  border-radius: 8px;
  cursor: pointer;
+ transition: .5;
 }
 button:hover {
- background-color: #16306b;
+ background-color: #28385e;
+ transition: 1s;
+}
+.login-button{
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h1{
+  font-size: 2.5rem;
 }
 h1,h2 {
  color: #1f3c88;
+ padding: 7px;
 }
 .formulario,.lista {
  margin-top: 20px;
@@ -38,7 +70,9 @@ input {
  width: 100%;
  margin-bottom: 12px;
  padding: 10px;
- border: 1px solid #ccc;
+ border: 1px solid #bcbcbc;
+ background-color: #ffffff;
+ color: #000000;
  border-radius: 8px;
 }
 .card-paciente {
@@ -53,15 +87,10 @@ input {
  gap: 10px;
  margin-top: 10px;
 }
-.boton-eliminar {
- background-color: #c0392b;
-}
-.boton-eliminar:hover {
- background-color: #962d22;
-}
-.boton-cancelar {
- background-color: #7f8c8d;
+.boton-cancelar{
+  margin-top: 25px;
 }
 .boton-cancelar:hover {
- background-color: #5f6b6d;
+ background-color: #28385e;
+ transition: 1s;
 }
