@@ -1,6 +1,5 @@
 const Product = require('../models/productModel');
 const { Op } = require('sequelize');
-// 🔽 AGREGA ESTA LÍNEA JUSTO AQUÍ Abajo 🔽
 const sequelize = require('../database/connection'); 
 
 class ProductService {
@@ -13,9 +12,10 @@ class ProductService {
     async getLowStockAlerts() {
         return await Product.findAll({
             where: {
-                stock: { [Op.lte]: sequelize.col('stock_minimo') } // Ahora sí reconocerá "sequelize"
+                stock: { [Op.lte]: sequelize.col('stock_minimo') }
             }
         });
     }
 }
+
 module.exports = ProductService;

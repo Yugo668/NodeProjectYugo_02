@@ -1,7 +1,6 @@
 const ProductService = require('../services/productService');
 const productService = new ProductService();
 
-// Listar todos los medicamentos
 exports.getProducts = async (req, res) => {
     try {
         const products = await productService.getAllProducts();
@@ -11,7 +10,6 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-// Alertas automáticas de bajo stock
 exports.getLowStockAlerts = async (req, res) => {
     try {
         const alerts = await productService.getLowStockAlerts();
@@ -21,7 +19,6 @@ exports.getLowStockAlerts = async (req, res) => {
     }
 };
 
-// 🔽 AGREGA ESTA NUEVA FUNCIÓN AQUÍ ABAJO 🔽
 exports.createProduct = async (req, res) => {
     try {
         const newProduct = await productService.create(req.body);
@@ -30,11 +27,20 @@ exports.createProduct = async (req, res) => {
         res.status(500).json({ "error": error.message });
     }
 };
-// 🔽 AGREGA ESTA FUNCIÓN AL FINAL DE TU CONTROLADOR 🔽
+
+exports.updateProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await productService.update(id, req.body);
+        res.status(200).json({ mensaje: "Medicamento actualizado con éxito" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 exports.deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        // Llama al método de tu servicio que ejecuta el DELETE en Sequelize/MySQL
         await productService.delete(id); 
         res.status(200).json({ mensaje: "Medicamento eliminado con éxito" });
     } catch (error) {

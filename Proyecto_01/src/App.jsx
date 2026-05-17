@@ -92,6 +92,15 @@ function App() {
     const url = modoEdicion ? `${API_URL}/${idProductoEditando}` : API_URL;
     const metodo = modoEdicion ? "PUT" : "POST";
 
+    const productoPayload = {
+      nombre_comercial: nombreComercial,
+      principio_activo: principioActivo,
+      precio: parseFloat(precio),
+      stock: parseInt(stock),
+      stock_minimo: parseInt(stockMinimo),
+      fecha_vencimiento: fechaVencimiento
+    };
+
     try {
       const res = await fetch(url, {
         method: metodo,
@@ -99,10 +108,7 @@ function App() {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({ 
-          nombre_comercial: nombreComercial, principio_activo: principioActivo, 
-          precio, stock, stock_minimo: stockMinimo, fecha_vencimiento: fechaVencimiento 
-        }),
+        body: JSON.stringify(productoPayload),
       });
       if (res.ok) { 
         setNotificacionExito(modoEdicion ? "✅ Medicamento actualizado con éxito" : "✅ Medicamento registrado con éxito"); 
@@ -119,7 +125,7 @@ function App() {
     setModoEdicion(true);
     setIdProductoEditando(p.id);
     setNombreComercial(p.nombre_comercial);
-    setPrincipioActivo(p.principio_activos || p.principio_activo);
+    setPrincipioActivo(p.principio_active || p.principio_activo); 
     setPrecio(p.precio);
     setStock(p.stock);
     setStockMinimo(p.stock_minimo);
@@ -214,7 +220,7 @@ function App() {
             <h2>Kardex General de Productos</h2>
             {productos.map((p) => (
               <div key={p.id} className="card-paciente">
-                <p><strong>Medicamento:</strong> {p.nombre_comercial} ({p.principio_activo || p.principio_activos})</p>
+                <p><strong>Medicamento:</strong> {p.nombre_comercial} ({p.principio_activo})</p>
                 <p><strong>Precio:</strong> S/. {p.precio} | <strong>Stock Físico:</strong> {p.stock} unids.</p>
                 <p><strong>Vencimiento:</strong> {p.fecha_vencimiento}</p>
                 
