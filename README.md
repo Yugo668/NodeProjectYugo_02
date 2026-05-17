@@ -2,7 +2,9 @@ VISTA FRONTEND - REACT
 
 Vista del Logueo:
 <img width="439" height="465" alt="image" src="https://github.com/user-attachments/assets/bc8334fa-3c25-4c16-a278-e8ee9749eaa0" />
+
 email: admin@gmail.com
+
 password: 1234
 
 Sistema de Registros:
@@ -29,3 +31,54 @@ JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbmZvIjoiam9qb2xldGUiLCJzdGF0dXMiOi
 
 Vista en el Dashboard ubicando el JWT:
 <img width="1249" height="245" alt="image" src="https://github.com/user-attachments/assets/e2f3cc97-660f-4749-b5ec-781cb71e8662" />
+
+Query de la Base de datos con MySql Workbench:
+
+CREATE DATABASE IF NOT EXISTS nova_salud;
+USE nova_salud;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol VARCHAR(50) DEFAULT 'cajero',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_comercial VARCHAR(150) NOT NULL,
+    principio_activo VARCHAR(150),
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    stock_minimo INT NOT NULL DEFAULT 10,
+    fecha_vencimiento DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS ventas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    total DECIMAL(10, 2) NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE IF NOT EXISTS detalle_ventas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venta_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (venta_id) REFERENCES ventas(id) ON DELETE CASCADE,
+    FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+INSERT INTO productos (nombre_comercial, principio_activo, precio, stock, stock_minimo, fecha_vencimiento) VALUES
+('Paracetamol 500mg', 'Paracetamol', 0.60, 120, 20, '2028-12-31'),
+('Amoxicilina 500mg', 'Amoxicilina', 1.50, 8, 15, '2027-08-22'),
+('Ibuprofeno 400mg', 'Ibuprofeno', 0.80, 95, 15, '2028-04-15'),
+('Omeprazol 20mg', 'Omeprazol', 1.80, 4, 12, '2027-11-02');
+
+SELECT * FROM productos;
