@@ -1,7 +1,13 @@
 VISTA FRONTEND - REACT
 
+
 Vista del Logueo:
+
+
+
 <img width="439" height="465" alt="image" src="https://github.com/user-attachments/assets/bc8334fa-3c25-4c16-a278-e8ee9749eaa0" />
+
+
 
 email: admin@gmail.com
 
