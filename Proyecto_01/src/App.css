@@ -27,14 +27,16 @@ body {
  border-radius: 12px;
  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .contenedor_2 {
- max-width: 800px;
+ max-width: 800px; 
  margin: 30px auto;
  background-color: white;
  padding: 25px;
  border-radius: 12px;
  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 button {
  background-color: #1f3c88;
  color: white;
@@ -55,11 +57,13 @@ button:hover {
   justify-content: center;
 }
 h1{
-  font-size: 2.5rem;
+  font-size: 2rem;
+  line-height: 1.3;
 }
 h1,h2 {
  color: #1f3c88;
  padding: 7px;
+ font-weight: bold;
 }
 .formulario,.lista {
  margin-top: 20px;
